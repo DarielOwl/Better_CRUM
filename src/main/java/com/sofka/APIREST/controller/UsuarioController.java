@@ -17,26 +17,31 @@ public class UsuarioController {
     @Autowired
     UsuarioService usuarioService; //Se auto instancia
 
-    @GetMapping() //Cuando llegue una peticion GET, haga esta opcion (con los usuarios)
+    //Cuando llegue una peticion GET, haga esta opcion (con los usuarios)
+    @GetMapping() 
     public ArrayList<UsuarioModel> obtenerUsuarios(){
         return usuarioService.obtenerUsuarios();
     }
 
-    @PostMapping() //RequestBody hace que puedan enviar datos del usuario en el cuerpo de la solicitud HTTP
+    //RequestBody hace que puedan enviar datos del usuario en el cuerpo de la solicitud HTTP
+    @PostMapping() 
     public UsuarioModel guardarUsuario(@RequestBody UsuarioModel usuario){
         return this.usuarioService.guardarUsuario(usuario);
     }
 
-    @GetMapping( path = "/{id}")
+    //Buscar por ID del usuario
+    @GetMapping( path = "/{id}") // Ejemplo: usuarios/1
     public Optional<UsuarioModel> obtenerUsuarioPorId(@PathVariable("id") Long id) {
-        return this.usuarioService.obtenerPorId(id);
+        return this.usuarioService.obtenerPorId(id); 
     }
 
+    //Obtener un usuario por su prioridad
     @GetMapping("/query")
     public ArrayList<UsuarioModel> obtenerUsuarioPorPrioridad(@RequestParam("prioridad") Integer prioridad){
-        return this.usuarioService.obtenerPorPrioridad(prioridad);
+        return this.usuarioService.obtenerPorPrioridad(prioridad); 
     }
 
+    //Eliminar un usuario por su ID
     @DeleteMapping( path = "/{id}")
     public String eliminarPorId(@PathVariable("id") Long id){
         boolean ok = this.usuarioService.eliminarUsuario(id);

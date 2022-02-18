@@ -26,20 +26,22 @@ public class UsuarioService {
     }
 
     
+    //Obtener un usuario dependiendo de su ID (El tipo "Optional" permite que no exista dicho ID, o sea nulo)
     public Optional<UsuarioModel> obtenerPorId(Long id){
         return usuarioRepository.findById(id);
     }
 
-
+    //Obtener el usuario por su prioridad 
     public ArrayList<UsuarioModel>  obtenerPorPrioridad(Integer prioridad) {
         return usuarioRepository.findByPrioridad(prioridad);
     }
 
+    //eliminar un usuario por su id
     public boolean eliminarUsuario(Long id) {
         try{
             usuarioRepository.deleteById(id);
             return true;
-        }catch(Exception err){
+        }catch(Exception err){ 
             return false;
         }
     }
